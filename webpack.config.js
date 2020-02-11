@@ -52,11 +52,8 @@ module.exports = {
             useDefaultAssetLoaders: false
         }),
         new HtmlWebpackPlugin({
-            title: 'ESRI Webpack Test',
+            template: './src/index.html',
             chunksSortMode: "none",
-            meta: {
-                viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-            }
         }),
         new MiniCssExtractPlugin({
             filename: "[name].css",

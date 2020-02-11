@@ -7,10 +7,8 @@ import './main.css';
 
 
 function main(){
-    const viewDiv = document.createElement('div');
-    viewDiv.id = "viewDiv";
+    const viewDiv = document.getElementById("viewDiv")
     const mainMap = new MainMap(viewDiv);
-    document.body.appendChild(viewDiv);
 }
 
 main();
