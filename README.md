@@ -7,12 +7,13 @@ enable loading ArcGIS JS API modules with ES6 imports.
 
 Uses Babel with Webpack's babel-loader to compile modern Javascript code.
 
-## install dependencies
+## Install dependencies
+
 ```
 npm install
 ```
 
-## start webpack dev server
+## Start webpack dev server
 
 Start the webpack dev server to serve the app on localhost and build the 
 project with live reloading.
@@ -22,9 +23,10 @@ npm start
 ```
 
 
-## generate a build 
+## Generate a build 
 
-Generate a production build, you can then serve the output folder.
+Generate a production build, you can then serve the '/dist' folder.
+
 ```
 npm run build
 ```
