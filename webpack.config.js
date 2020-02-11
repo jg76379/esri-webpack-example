@@ -8,6 +8,11 @@ module.exports = {
     entry: {
         app: './src/index.js',
     },
+    output: {
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
     module: {
         rules: [
             {
@@ -36,14 +41,11 @@ module.exports = {
                 ],
             },
             {
+                // CSS
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, "css-loader"]
             }
         ]
-    },
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: './dist'
     },
     plugins: [
         new ArcGISPlugin({
@@ -61,16 +63,12 @@ module.exports = {
             chunkFilename: "[id].css"
         }),
     ],
-    output: {
-        filename: '[name].bundle.js',
-        chunkFilename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-    },
+    // Change module resolution, ArcGIS JS API fails to bundle without this
     resolve: {
         modules: [path.resolve(__dirname, "/src"), "node_modules/"],
         extensions: [".js", ".scss"]
       },
-    
+    // exclude these modules to reduce bundle size
     externals: [
         (context, request, callback) => {
             if (/pe-wasm$/.test(request)) {
@@ -79,9 +77,17 @@ module.exports = {
             callback();
         }
     ],
+    // Ignore node globals used in ArcGIS JS API,
+    // otherwise webpack will try to bundle them.
     node: {
         process: false,
         global: false,
         fs: "empty",
-    }
+    },
+    // Include source maps in the output
+    // devtool: 'cheap-module-eval-source-map',
+    // Tell webpack dev server where the build directory is
+    devServer: {
+        contentBase: './dist'
+    },
 };
