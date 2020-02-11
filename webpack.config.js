@@ -15,6 +15,11 @@ module.exports = {
     },
     module: {
         rules: [
+            { 
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                loader: "babel-loader" 
+            },
             {
                 // images
                 test: /\.(jpe?g|png|gif|webp)$/,
